@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Services - Mon Portfolio{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="text-center mb-5">Mes services</h1>
+    <div class="row g-4">
+        {% for service in services %}
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm text-center p-4">
+                <i class="bi {{ service.icone }} fs-1 text-primary mb-3"></i>
+                <h5 class="card-title">{{ service.titre }}</h5>
+                <p class="card-text">{{ service.description }}</p>
+                <p class="text-muted">{{ service.prix }}</p>
+                <ul class="list-unstyled">
+                    {% for feature in service.get_features_list() %}
+                    <li><i class="bi bi-check-circle-fill text-success me-2"></i>{{ feature }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% else %}
+        <p class="text-center">Aucun service pour le moment.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

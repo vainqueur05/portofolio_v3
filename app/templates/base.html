@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Mon Portfolio{% endblock %}</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('main.index') }}">Master Mind</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('main.index') }}">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('main.about') }}">À propos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('main.projects') }}">Projets</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('main.services') }}">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('main.contact') }}">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    {# Admin bar (visible si connecté) #}
+    {% if current_user.is_authenticated %}
+    <nav class="navbar navbar-dark bg-dark navbar-expand-sm admin-bar" style="margin-top: 56px;">
+        <div class="container">
+            <span class="navbar-brand text-warning">Master Administrateur</span>
+            <div class="navbar-nav">
+                <a class="nav-link" href="{{ url_for('admin.dashboard') }}"><i class="bi bi-speedometer2"></i> Dashboard</a>
+                <a class="nav-link" href="{{ url_for('admin.projects') }}"><i class="bi bi-folder"></i> Projets</a>
+                <a class="nav-link" href="{{ url_for('admin.services') }}"><i class="bi bi-gear"></i> Services</a>
+                <a class="nav-link" href="{{ url_for('admin.testimonials') }}"><i class="bi bi-chat-quote"></i> Témoignages</a>
+                <a class="nav-link" href="{{ url_for('admin.bio') }}"><i class="bi bi-person"></i> Bio</a>
+                <a class="nav-link" href="{{ url_for('admin.view_logs') }}"><i class="bi bi-file-text"></i> Logs</a>
+                <a class="nav-link text-danger" href="{{ url_for('admin.logout') }}"><i class="bi bi-box-arrow-right"></i> Déconnexion</a>
+            </div>
+        </div>
+    </nav>
+    {% endif %}
+
+    <!-- Main content -->
+    <main class="pt-5 mt-4">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer amélioré -->
+    <footer class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Vainqueur Kalema</h5>
+                    <p>Développeur passionné par la création d'expériences web uniques et performantes. Basé à Lubumbashi, je travaille avec des clients du monde entier.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Liens rapides</h5>
+                    <ul class="list-unstyled" >
+                        <li><a href="{{ url_for('main.index') }}" style="color: #ffffff;">Accueil</a></li>
+                        <li><a href="{{ url_for('main.about') }}" style="color: #ffffff;">À propos</a></li>
+                        <li><a href="{{ url_for('main.projects') }}" style="color: #ffffff;">Projets</a></li>
+                        <li><a href="{{ url_for('main.services') }}" style="color: #ffffff;">Services</a></li>
+                        <li><a href="{{ url_for('main.contact') }}" style="color: #ffffff;">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Suivez-moi</h5>
+                    <div class="social-links">
+                        <a href="https://facebook.com/tonprofil" target="_blank"><i class="bi bi-facebook"></i></a>
+                        <a href="https://wa.me/243895288981" target="_blank"><i class="bi bi-whatsapp"></i></a>
+                        <a href="https://instagram.com/tonprofil" target="_blank"><i class="bi bi-instagram"></i></a>
+                        <a href="https://github.com/tonprofil" target="_blank"><i class="bi bi-github"></i></a>
+                        <a href="https://linkedin.com/in/tonprofil" target="_blank"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="bg-light mt-4">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2026 Vainqueur Kalema, Développeur web. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

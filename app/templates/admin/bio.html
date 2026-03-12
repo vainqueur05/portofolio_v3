@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Gestion de la bio{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="mb-4">Modifier la page "À propos"</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    {{ form.nom.label(class="form-label") }}
+                    {{ form.nom(class="form-control") }}
+                </div>
+                <div class="mb-3">
+                    {{ form.titre.label(class="form-label") }}
+                    {{ form.titre(class="form-control") }}
+                </div>
+                <div class="mb-3">
+                    {{ form.localisation.label(class="form-label") }}
+                    {{ form.localisation(class="form-control") }}
+                </div>
+                <div class="mb-3">
+                    {{ form.email.label(class="form-label") }}
+                    {{ form.email(class="form-control") }}
+                </div>
+                <div class="mb-3 form-check">
+                    {{ form.disponible(class="form-check-input") }}
+                    {{ form.disponible.label(class="form-check-label") }}
+                </div>
+                <div class="mb-3">
+                    {{ form.avatar.label(class="form-label") }}
+                    {{ form.avatar(class="form-control") }}
+                    {% if bio and bio.avatar %}
+                        <img src="{{ url_for('static', filename='uploads/' + bio.avatar) }}" class="mt-2" style="max-width: 150px;">
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    {{ form.bio_paragraphes.label(class="form-label") }}
+                    {{ form.bio_paragraphes(class="form-control", rows=5) }}
+                    <small class="text-muted">Chaque paragraphe sur une nouvelle ligne.</small>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Compétences</label>
+                    {{ form.competences_langages(class="form-control mb-2", placeholder="Langages (séparés par des virgules)") }}
+                    {{ form.competences_frameworks(class="form-control mb-2", placeholder="Frameworks (séparés par des virgules)") }}
+                    {{ form.competences_outils(class="form-control mb-2", placeholder="Outils (séparés par des virgules)") }}
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+        <a href="{{ url_for('admin.dashboard') }}" class="btn btn-secondary">Annuler</a>
+    </form>
+</div>
+{% endblock %}

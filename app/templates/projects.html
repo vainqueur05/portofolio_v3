@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Mes projets - Mon Portfolio{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="text-center mb-5">Mes projets & Realisations</h1>
+    <div class="row g-4">
+        {% for project in projects %}
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm">
+                <img src="{{ url_for('static', filename='uploads/projects/' + project.image_principale) }}" class="card-img-top" alt="{{ project.titre }}" style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ project.titre }}</h5>
+                    <p class="card-text">{{ project.description_courte }}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">{{ project.date or '' }}</small>
+                        <a href="{{ url_for('main.project_detail', id=project.id) }}" class="btn btn-sm btn-outline-primary">Voir plus</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <p class="text-center">Aucun projet pour le moment.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

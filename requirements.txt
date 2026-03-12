@@ -1,0 +1,11 @@
+Flask
+Flask-SQLAlchemy
+Flask-Migrate
+Flask-WTF
+Flask-Login
+Flask-Compress
+Flask-Caching
+python-dotenv
+email-validator
+gunicorn
+psycopg2-binary  # si tu utilises PostgreSQL en prod

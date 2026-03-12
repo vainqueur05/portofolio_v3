@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Gestion des services{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Gestion des services</h1>
+        <a href="{{ url_for('admin.service_new') }}" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Nouveau service
+        </a>
+    </div>
+    {% include 'admin/_messages.html' %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Icône</th>
+                <th>Titre</th>
+                <th>Prix</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for service in services %}
+            <tr>
+                <td>{{ service.id }}</td>
+                <td><i class="bi {{ service.icone }}"></i></td>
+                <td>{{ service.titre }}</td>
+                <td>{{ service.prix }}</td>
+                <td>
+                    <a href="{{ url_for('admin.service_edit', id=service.id) }}" class="btn btn-sm btn-warning">Modifier</a>
+                    <form action="{{ url_for('admin.service_delete', id=service.id) }}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Supprimer ce service ?')">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

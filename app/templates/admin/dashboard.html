@@ -1,0 +1,62 @@
+<!-- app/templates/admin/dashboard.html -->
+{% extends 'base.html' %}
+
+{% block title %}Tableau de bord Admin{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="mb-4">Tableau de bord</h1>
+    <div class="row g-4">
+        <div class="col-md-3">
+            <div class="card text-center h-100 shadow-sm">
+                <div class="card-body">
+                    <i class="bi bi-folder fs-1 text-primary"></i>
+                    <h5 class="card-title mt-3">Projets</h5>
+                    <p class="card-text display-6">{{ project_count }}</p>
+                    <a href="{{ url_for('admin.projects') }}" class="btn btn-primary">Gérer</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center h-100 shadow-sm">
+                <div class="card-body">
+                    <i class="bi bi-gear fs-1 text-primary"></i>
+                    <h5 class="card-title mt-3">Services</h5>
+                    <p class="card-text display-6">{{ service_count }}</p>
+                    <a href="{{ url_for('admin.services') }}" class="btn btn-primary">Gérer</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center h-100 shadow-sm">
+                <div class="card-body">
+                    <i class="bi bi-chat-quote fs-1 text-primary"></i>
+                    <h5 class="card-title mt-3">Témoignages</h5>
+                    <p class="card-text display-6">{{ testimonial_count }}</p>
+                    <a href="{{ url_for('admin.testimonials') }}" class="btn btn-primary">Gérer</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center h-100 shadow-sm">
+                <div class="card-body">
+                    <i class="bi bi-person fs-1 text-primary"></i>
+                    <h5 class="card-title mt-3">Bio</h5>
+                    <p class="card-text">Informations personnelles</p>
+                    <a href="{{ url_for('admin.bio') }}" class="btn btn-primary">Modifier</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+    <div class="card text-center">
+        <div class="card-body">
+            <i class="bi bi-bar-chart fs-1"></i>
+            <h5 class="card-title mt-3">Statistiques</h5>
+            <p class="card-text">Consultez les statistiques de visites sur Google Analytics.</p>
+            <a href="https://analytics.google.com" target="_blank" class="btn btn-primary">Ouvrir Analytics</a>
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+{% endblock %}

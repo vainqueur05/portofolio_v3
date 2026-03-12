@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ project.titre }} - Mon Portfolio{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('main.projects') }}">Projets</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ project.titre }}</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <h1 class="mb-3">{{ project.titre }}</h1>
+            <p class="text-muted mb-4">{{ project.date }}</p>
+            <img src="{{ url_for('static', filename='uploads/projects/' + project.image_principale) }}" class="img-fluid rounded mb-4" alt="{{ project.titre }}">
+            <div class="mb-4">
+                <h4>Description</h4>
+                <p>{{ project.description_longue }}</p>
+            </div>
+            <div class="mb-4">
+                <h4>Technologies</h4>
+                {% for tech in project.get_technologies_list() %}
+                <span class="badge bg-primary me-1">{{ tech }}</span>
+                {% endfor %}
+            </div>
+            <div class="mb-4">
+                {% if project.lien_demo %}
+                <a href="{{ project.lien_demo }}" target="_blank" class="btn btn-primary me-2">Voir la démo</a>
+                {% endif %}
+                {% if project.lien_code %}
+                <a href="{{ project.lien_code }}" target="_blank" class="btn btn-outline-secondary">Code source</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5>Détails</h5>
+                    <p><strong>Client :</strong> {{ project.client or 'Personnel' }}</p>
+                    <p><strong>Catégorie :</strong> {{ project.categorie or 'Non spécifiée' }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

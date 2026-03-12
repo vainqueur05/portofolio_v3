@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ 'Modifier' if service else 'Ajouter' }} un service{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="mb-4">{{ 'Modifier' if service else 'Ajouter' }} un service</h1>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <div class="mb-3">
+            {{ form.titre.label(class="form-label") }}
+            {{ form.titre(class="form-control") }}
+        </div>
+        <div class="mb-3">
+            {{ form.description.label(class="form-label") }}
+            {{ form.description(class="form-control", rows=4) }}
+        </div>
+        <div class="mb-3">
+            {{ form.icone.label(class="form-label") }}
+            {{ form.icone(class="form-control") }}
+            <small class="text-muted">Ex: bi-briefcase, bi-code-slash</small>
+        </div>
+        <div class="mb-3">
+            {{ form.prix.label(class="form-label") }}
+            {{ form.prix(class="form-control") }}
+        </div>
+        <div class="mb-3">
+            {{ form.features.label(class="form-label") }}
+            {{ form.features(class="form-control", rows=5) }}
+            <small class="text-muted">Une fonctionnalité par ligne.</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+        <a href="{{ url_for('admin.services') }}" class="btn btn-secondary">Annuler</a>
+    </form>
+</div>
+{% endblock %}

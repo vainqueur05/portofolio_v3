@@ -1,0 +1,92 @@
+<!-- app/templates/admin/project_form.html -->
+{% extends 'base.html' %}
+
+{% block title %}{{ 'Modifier' if project else 'Ajouter' }} un projet{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="mb-4">{{ 'Modifier' if project else 'Ajouter' }} un projet</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    {{ form.titre.label(class="form-label") }}
+                    {{ form.titre(class="form-control") }}
+                    {% if form.titre.errors %}
+                        <div class="text-danger">{{ form.titre.errors[0] }}</div>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    {{ form.description_courte.label(class="form-label") }}
+                    {{ form.description_courte(class="form-control", rows=3) }}
+                </div>
+                <div class="mb-3">
+                    {{ form.description_longue.label(class="form-label") }}
+                    {{ form.description_longue(class="form-control", rows=5) }}
+                </div>
+                <div class="mb-3">
+                    {{ form.technologies.label(class="form-label") }}
+                    {{ form.technologies(class="form-control") }}
+                    <small class="text-muted">Séparées par des virgules</small>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="mb-3">
+                    {{ form.image_principale.label(class="form-label") }}
+                    {{ form.image_principale(class="form-control") }}
+                    {% if project and project.image_principale %}
+                        <div class="mt-2">
+                            <img src="{{ url_for('static', filename='uploads/projects/' + project.image_principale) }}"
+                                 alt="Image actuelle" style="max-width: 150px;">
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    {{ form.images_secondaires.label(class="form-label") }}
+                    {{ form.images_secondaires(class="form-control", multiple=true) }}
+                    <small class="text-muted">Maintenez Ctrl pour en sélectionner plusieurs</small>
+                    {% if project and project.images_secondaires %}
+                        <div class="mt-2">
+                            <p>Images secondaires actuelles :</p>
+                            {% for img in project.get_images_secondaires_list() %}
+                                <img src="{{ url_for('static', filename='uploads/projects/' + img) }}" alt="..." style="max-width: 80px; margin-right: 5px;">
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    {{ form.lien_demo.label(class="form-label") }}
+                    {{ form.lien_demo(class="form-control") }}
+                </div>
+                <div class="mb-3">
+                    {{ form.lien_code.label(class="form-label") }}
+                    {{ form.lien_code(class="form-control") }}
+                </div>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        {{ form.date.label(class="form-label") }}
+                        {{ form.date(class="form-control") }}
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        {{ form.client.label(class="form-label") }}
+                        {{ form.client(class="form-control") }}
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        {{ form.categorie.label(class="form-label") }}
+                        {{ form.categorie(class="form-control") }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+            <a href="{{ url_for('admin.projects') }}" class="btn btn-secondary">Annuler</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
