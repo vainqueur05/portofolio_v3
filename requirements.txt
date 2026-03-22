@@ -9,3 +9,4 @@ python-dotenv
 email-validator
 gunicorn
 psycopg2-binary  # si tu utilises PostgreSQL en prod
+Procfile
