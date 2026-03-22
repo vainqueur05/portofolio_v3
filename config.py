@@ -9,6 +9,7 @@ class Config:
     SECRET_KEY = os.getenv('SECRET_KEY', 'dev-key-change-in-prod')
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'sqlite:///site.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    PORT=5000
     # Pour les uploads
     MAX_CONTENT_LENGTH = 16 * 1024 * 1024  # 16 Mo max
     UPLOAD_FOLDER = 'app/static/images/uploads'
